@@ -1,0 +1,18 @@
+sdk-version: 0.13.54
+name: DAML-task-manager-scala
+source: daml
+scenario: Main:setup
+parties:
+  - Scrum Master
+  - Dev
+version: 1.0.0
+exposed-modules:
+  - Main
+dependencies:
+  - daml-prim
+  - daml-stdlib
+codegen:
+  scala:
+    package-prefix: com.knoldus.example.iou.model
+    output-directory: scala-codegen/src/main/scala
+    verbosity: 2

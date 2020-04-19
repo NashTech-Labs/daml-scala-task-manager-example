@@ -1,0 +1,46 @@
+daml 1.2
+module TaskTrackingTrade where
+
+import DA.Assert
+
+import TaskTracking
+
+template TaskTrackingTrade
+  with
+    buyer : Party
+    seller : Party
+    baseTaskTrackingCid : TaskTrackingCid
+    baseIssuer : Party
+    baseTask : Text
+    basetimeEstimate : Decimal
+    quoteIssuer : Party
+    quoteTask : Text
+    quotetimeEstimate : Decimal
+  where
+    signatory buyer
+
+    controller seller can
+      TaskTrackingTrade_Accept : (TaskTrackingCid, TaskTrackingCid)
+        with
+          quoteTaskTrackingCid : TaskTrackingCid
+        do
+          baseTaskTracking <- fetch baseTaskTrackingCid
+          baseIssuer === baseTaskTracking.issuer
+          baseTask === baseTaskTracking.task
+          basetimeEstimate === baseTaskTracking.timeEstimate
+          buyer === baseTaskTracking.owner
+          quoteTaskTracking <- fetch quoteTaskTrackingCid
+          quoteIssuer === quoteTaskTracking.issuer
+          quoteTask === quoteTaskTracking.task
+          quotetimeEstimate === quoteTaskTracking.timeEstimate
+          seller === quoteTaskTracking.owner
+          quoteTaskTrackingTransferCid <- exercise quoteTaskTrackingCid TaskTracking_Transfer with
+            newOwner = buyer
+          transferredQuoteTaskTrackingCid <- exercise quoteTaskTrackingTransferCid TaskTrackingTransfer_Accept
+          baseTaskTrackingTransferCid <- exercise baseTaskTrackingCid TaskTracking_Transfer with
+            newOwner = seller
+          transferredBaseTaskTrackingCid <- exercise baseTaskTrackingTransferCid TaskTrackingTransfer_Accept
+          return (transferredQuoteTaskTrackingCid, transferredBaseTaskTrackingCid)
+
+      TradeProposal_Reject : ()
+        do return ()

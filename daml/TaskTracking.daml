@@ -1,0 +1,83 @@
+daml 1.2
+module TaskTracking where
+
+type TaskTrackingCid = ContractId TaskTracking
+
+template TaskTracking
+  with
+    issuer : Party
+    owner : Party
+    task : Text
+    timeEstimate : Decimal
+    observers : [Party]
+  where
+    ensure timeEstimate > 0.0
+
+    signatory issuer, owner
+
+    observer observers
+
+    controller owner can
+
+      -- Split the IOU by dividing the timeEstimate.
+      TaskTracking_Split : (TaskTrackingCid, TaskTrackingCid)
+         with
+          splitAmount: Decimal
+        do
+          let restAmount = timeEstimate - splitAmount
+          splitCid <- create this with timeEstimate = splitAmount
+          restCid <- create this with timeEstimate = restAmount
+          return (splitCid, restCid)
+
+      -- Merge two IOUs by aggregating their timeEstimates.
+      TaskTracking_Merge : TaskTrackingCid
+        with
+          otherCid: TaskTrackingCid
+        do
+          otherTaskTracking <- fetch otherCid
+          -- Check the two IOU's are compatible
+          assert (
+            task == otherTaskTracking.task &&
+            owner == otherTaskTracking.owner &&
+            issuer == otherTaskTracking.issuer
+            )
+          -- Retire the old TaskTracking
+          archive otherCid
+          -- Return the merged TaskTracking
+          create this with timeEstimate = timeEstimate + otherTaskTracking.timeEstimate
+
+      TaskTracking_Transfer : ContractId TaskTrackingTransfer
+        with
+          newOwner : Party
+        do create TaskTrackingTransfer with taskTracking = this; newOwner
+
+      TaskTracking_AddObserver : TaskTrackingCid
+        with
+          newObserver : Party
+        do create this with observers = newObserver :: observers
+
+      TaskTracking_RemoveObserver : TaskTrackingCid
+        with
+          oldObserver : Party
+        do create this with observers = filter (/= oldObserver) observers
+
+template TaskTrackingTransfer
+  with
+    taskTracking : TaskTracking
+    newOwner : Party
+  where
+    signatory taskTracking.issuer, taskTracking.owner
+
+    controller taskTracking.owner can
+      TaskTrackingTransfer_Cancel : TaskTrackingCid
+        do create taskTracking
+
+    controller newOwner can
+      TaskTrackingTransfer_Reject : TaskTrackingCid
+        do create taskTracking
+
+      TaskTrackingTransfer_Accept : TaskTrackingCid
+        do
+          create taskTracking with
+            owner = newOwner
+            observers = []

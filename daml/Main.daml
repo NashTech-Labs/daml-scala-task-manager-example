@@ -1,0 +1,39 @@
+-- Copyright (c) 2020 The DAML Authors. All rights reserved.
+-- SPDX-License-Identifier: Apache-2.0
+
+daml 1.2
+module Main where
+
+import TaskTracking
+import TaskTrackingTrade()
+
+setup = scenario do
+  alice <- getParty "Alice"
+  bob <- getParty "Bob"
+  scrumMasterB <- getParty "USD_Bank"
+  scrumMasterA <- getParty "EUR_Bank"
+
+  -- Assign task to Alice from ScrumMasterA
+  taskTrackingTransferAliceCid <- submit scrumMasterA do
+    taskTrackingCid <- create TaskTracking with
+      issuer = scrumMasterA
+      owner = scrumMasterA
+      task = "Task for Alice"
+      timeEstimate = 8.0
+      observers = []
+    exercise taskTrackingCid TaskTracking_Transfer with newOwner = alice
+
+  taskTrackingTransferBobCid <- submit scrumMasterB do
+    taskTrackingCid <- create TaskTracking with
+      issuer = scrumMasterB
+      owner = scrumMasterB
+      task = "Task for bob"
+      timeEstimate = 8.0
+      observers = []
+    exercise taskTrackingCid TaskTracking_Transfer with newOwner = bob
+
+  -- Bob and Alice accept.
+  submit alice do
+    exercise taskTrackingTransferAliceCid TaskTrackingTransfer_Accept
+  submit bob do
+    exercise taskTrackingTransferBobCid TaskTrackingTransfer_Accept

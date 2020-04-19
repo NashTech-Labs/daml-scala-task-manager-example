@@ -1,0 +1,33 @@
+[0m[[0m[0minfo[0m] [0m[0mPackaging /home/himani/daml-coe/task-manager/application/target/scala-2.12/application_2.12-0.0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/FutureUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/FutureUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/taskTracking/TaskTrackingMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/taskTracking/TaskTrackingMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/ClientUtil.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/ClientUtil.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/taskTracking/TaskTrackingMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/taskTracking/TaskTrackingMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/taskTracking/TaskTrackingMain$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/taskTracking/TaskTrackingMain$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/taskTracking[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/taskTracking[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/ClientUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/ClientUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/DecodeUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/DecodeUtil$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus[0m
+[0m[[0m[0mdebug[0m] [0m[0m	logback.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/logback.xml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/FutureUtil.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/FutureUtil.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/knoldus/example/iou/DecodeUtil.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/himani/daml-coe/task-manager/application/target/scala-2.12/classes/com/knoldus/example/iou/DecodeUtil.class[0m
+[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m
